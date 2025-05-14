@@ -44,4 +44,4 @@ required_BioconductorPackages<-c("flowCore","FlowSOM","ComplexHeatmap","limma","
 BioC_package_installer(required_BioconductorPackages)
 
 ```
-### Required file formats and inputs for cytoFlagR can be found in the [wiki page](https://github.com/bioinfoSE/cytoFlagR/wiki/cytoFlagR-wiki/).
+### Details on cytoFlagR usage can be found in the [wiki page](https://github.com/bioinfoSE/cytoFlagR/wiki/cytoFlagR-wiki/).
