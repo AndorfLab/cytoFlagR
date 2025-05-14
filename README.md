@@ -14,7 +14,9 @@ With the advancement of cytometry techniques, researchers have the ability to cr
 
 ## Download cytoFlagR
 ```
-install.packages("devtools") ## ignore this line if you have installed devtools previously
+if(!require("devtools", character.only = TRUE, quietly = TRUE)) {
+  install.packages("devtools")
+}
 library(devtools)
 devtools::install_github('bioinfoSE/cytoFlagR')
 ```
@@ -23,7 +25,8 @@ devtools::install_github('bioinfoSE/cytoFlagR')
 This tool was developed using R version 4.4.1, the version required to run this tool.
 Download and install R from [here](https://cran.r-project.org/)
 
-cytoFlagR requires several R and BioConductor packages to run. Install R [BioConductor](https://www.bioconductor.org/install/) package manager with the instructions provided (click on BioConductor to be re-directed).
+cytoFlagR requires several R and BioConductor packages to run. Information on BioConductor can be found [here](https://www.bioconductor.org/install/).
+
 Use the package_installer.R function to install the missing required packages from the list below
 ```
 source("package_installer.R")
@@ -34,14 +37,20 @@ requiredPackages<-c("dplyr","scales","tidyr","reshape2","readr","matrixStats","r
                     "randomcoloR","ggrepel","emdist","circlize","gridExtra","stats",
                     "LaplacesDemon","pheatmap","umap","progress","crayon","patchwork",
                     "ggpmisc","viridis","tidyverse","shiny","shinyjs","DT","bslib","shinyjs",
-                    "cluster","rstudioapi")
+                    "cluster","rstudioapi","grid","shinycssloaders","shinyWidgets")
 ### install
 package_installer(requiredPackages)
+### check if the packages can be loaded
+lapply(requiredPackages, require, character.only = TRUE)
+
+### install Bioconductor package installer
+checkBiocManager_install()
 
 ### required BioConductor packages
 required_BioconductorPackages<-c("flowCore","FlowSOM","ComplexHeatmap","limma","ConsensusClusterPlus")
 ### install
 BioC_package_installer(required_BioconductorPackages)
-
+### check if the packages can be loaded
+lapply(required_BioconductorPackages, require, character.only = TRUE)
 ```
 ### Details on cytoFlagR usage can be found in the [wiki page](https://github.com/bioinfoSE/cytoFlagR/wiki/cytoFlagR-wiki/).
