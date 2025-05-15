@@ -1,10 +1,10 @@
-#!/usr/bin/env R
 
 ###############################################################################################
 ############################~~~~ cytoFlagR R package installer ~~~~############################
 ###############################################################################################
 
-### this is a function to check for missing R packages and installing them
+###' this is a function to check for missing R packages and installing them
+
 package_installer<-function(pckg) {
   for (i in pckg) {
     if(!require(i, character.only = TRUE, quietly = TRUE)) {
@@ -14,14 +14,16 @@ package_installer<-function(pckg) {
   }
 }
 
-### check if Bioconductor is installed
+###' check if Bioconductor is installed
+
 checkBiocManager_install<-function() {
   if(!require("BiocManager", character.only = TRUE, quietly = TRUE))
     install.packages("BiocManager")
   BiocManager::install()
 }
 
-### this is a function to check for missing Bioconductor packages and installing them
+###' this is a function to check for missing Bioconductor packages and installing them
+
 BioC_package_installer<-function(bc) {
   for (x in bc) {
     if(!require(x, character.only = TRUE, quietly = TRUE)) {
