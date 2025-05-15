@@ -1,4 +1,4 @@
-# ${{\color{#236CA6}{\Large{\textsf{cytoFlagR}}}}}$
+# ${{\color{#236CA6}{\Large{\textnormal{\textsf{cytoFlagR}}}}}}$
 #### A comprehensive framework to objectively assess high-dimensional cytometry data for batch effects
 
 ## About
