@@ -53,4 +53,4 @@ BioC_package_installer(required_BioconductorPackages)
 ### check if the packages can be loaded
 lapply(required_BioconductorPackages, require, character.only = TRUE)
 ```
-### Details on cytoFlagR usage can be found in the [wiki page](https://github.com/bioinfoSE/cytoFlagR/wiki/cytoFlagR-wiki/).
+### Details on cytoFlagR usage can be found in the [wiki page](https://github.com/AndorfLab/cytoFlagR/wiki/cytoFlagR-wiki/).
