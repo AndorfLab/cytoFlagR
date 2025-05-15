@@ -6,7 +6,7 @@ With the advancement of cytometry techniques, researchers have the ability to cr
 
 ## This tool consists of five main steps
 
-#### 1. Pre-processing and transformation of FCS files of control samples containing live, pre-gated single cells and preliminary visual inspection of data 
+#### 1. Transformation of FCS files of control samples containing live, pre-gated single cells and preliminary visual inspection of data 
 #### 2. An Inter Quartile Range (IQR) based assessment to check for batch effects for each marker in each control sample provided for the negative and positive populations as well as the percent of positive cells. 
 #### 3. An Earth Mover’s Distance based assessment to identify batch issues within every marker and control sample 
 #### 4. A comprehensive summary of the assessment metrics described indicating potentially problematic batches and markers present in the data 
