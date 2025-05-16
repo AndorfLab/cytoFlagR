@@ -4,13 +4,20 @@
 ## About
 With the advancement of cytometry techniques, researchers have the ability to create longitudinal immunological studies that generate high-dimensional cytometry datasets. However, acquiring this data over a long period of time and analyzing this data over multiple experimental runs leads to technical variations between these experimental batches, commonly known as ‘batch effects’. Several different approaches to minimize/correct for these batch effects exist. However, there are currently no computational approaches to objectively evaluate data and identify these potential batch effects. cytoFlagR is a unique, automated approach that assesses high-parameter cytometry datasets and provides the user with a comprehensive evaluation of problematic batches and markers present in their data. Important caveat: while this tool is designed to be primarily applied on control samples, it is also able to assess biological samples. However, users should take into consideration the inherent biological variability between their biological samples while interpreting the outcome of cytoFlagR on their data. 
 
-## This tool consists of five main steps
+<dl>
+<h2>This tool consists of five main steps</h2>
 
-#### 1. Transformation of FCS files of control samples containing live, pre-gated single cells and preliminary visual inspection of data 
-#### 2. An Inter Quartile Range (IQR) based assessment to check for batch effects for each marker in each control sample provided for the negative and positive populations as well as the percent of positive cells. 
-#### 3. An Earth Mover’s Distance based assessment to identify batch issues within every marker and control sample 
-#### 4. A comprehensive summary of the assessment metrics described indicating potentially problematic batches and markers present in the data 
-#### 5. An unsupervised clustering-based assessment to highlight batch issues present within the unique cell populations of the data 
+1. Transformation of FCS files of control samples containing live, pre-gated single cells and preliminary visual inspection of data
+  
+ 2. An Inter Quartile Range (IQR) based assessment to check for batch effects for each marker in each control sample provided for the negative and positive populations as well as the percent of positive cells. <br>
+ 
+ 3. An Earth Mover’s Distance based assessment to identify batch issues within every marker and control sample <br>
+ 
+ 4. A comprehensive summary of the assessment metrics described indicating potentially problematic batches and markers present in the data <br>
+ 
+ 5. An unsupervised clustering-based assessment to highlight batch issues present within the unique cell populations of the data <br>
+ 
+</dl>
 
 ## Download cytoFlagR
 ```
