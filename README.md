@@ -10,7 +10,7 @@ With the advancement of cytometry techniques, researchers have the ability to cr
 #### 2. An Inter Quartile Range (IQR) based assessment to check for batch effects for each marker in each control sample provided for the negative and positive populations as well as the percent of positive cells. 
 #### 3. An Earth Mover’s Distance based assessment to identify batch issues within every marker and control sample 
 #### 4. A comprehensive summary of the assessment metrics described indicating potentially problematic batches and markers present in the data 
-#### 5. Inspecting control samples using an unsupervised clustering-based assessment to highlight batch issues present within the unique cell populations of the data 
+#### 5. An unsupervised clustering-based assessment to highlight batch issues present within the unique cell populations of the data 
 
 ## Download cytoFlagR
 ```
@@ -25,7 +25,7 @@ devtools::install_github('bioinfoSE/cytoFlagR')
 This tool was developed using R version 4.4.1, the version required to run this tool.
 Download and install R from [here](https://cran.r-project.org/)
 
-cytoFlagR requires several R and BioConductor packages to run. Information on BioConductor can be found [here](https://www.bioconductor.org/install/).
+cytoFlagR requires several R and BioConductor packages to run.
 
 Use the package_installer.R function to install the missing required packages from the list below
 ```
@@ -53,4 +53,4 @@ BioC_package_installer(required_BioconductorPackages)
 ### check if the packages can be loaded
 lapply(required_BioconductorPackages, require, character.only = TRUE)
 ```
-### Details on cytoFlagR usage can be found in the [wiki page](https://github.com/AndorfLab/cytoFlagR/wiki/cytoFlagR-wiki/).
+### Detailed instructions for using cytoFlagR are available on the [wiki page](https://github.com/AndorfLab/cytoFlagR/wiki/cytoFlagR-wiki/).
