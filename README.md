@@ -60,4 +60,4 @@ BioC_package_installer(required_BioconductorPackages)
 ### check if the packages can be loaded
 lapply(required_BioconductorPackages, require, character.only = TRUE)
 ```
-### Detailed instructions for using cytoFlagR are available on the [wiki page](https://github.com/AndorfLab/cytoFlagR/wiki/cytoFlagR-wiki/).
+### The code to run cytoFlagR is found in the `R/` folder when you download cytoFlagR and detailed instructions for using cytoFlagR are available on the [wiki page](https://github.com/AndorfLab/cytoFlagR/wiki/cytoFlagR-wiki/).
