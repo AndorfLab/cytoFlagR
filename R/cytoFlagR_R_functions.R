@@ -480,7 +480,7 @@ generate_UMAP<-function(df,batch_colm,control_colm,marker_list,batch_list,
   
   #### get character vector of all cells denoted by sample_id
   samp_filt<-subdf[,"sample_id"]
-  
+  cat("calculating UMAP dimensions...\n")
   ### get UMAP dimensions
   out_umap<-umap::umap(subdf[,marker_list], config = umap.defaults)
   
@@ -502,6 +502,7 @@ generate_UMAP<-function(df,batch_colm,control_colm,marker_list,batch_list,
   
   umapdf<-subset(dims_umap,select = c(UMAP_1,UMAP_2,control,batch))
   
+  cat("Generating UMAP plot...\n")
   umap_plot<-ggplot(umapdf, aes(x = UMAP_1, y = UMAP_2, colour = batch)) + 
     geom_point(alpha = 0.3,size=0.1) + 
     scale_colour_manual("Batch",values = batch_colours) + 
