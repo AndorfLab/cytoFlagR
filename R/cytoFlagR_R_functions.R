@@ -899,7 +899,7 @@ iqr_boxplot_fixed_coords<-function(df,type,marker,control_list,batch_list,colour
       scale_x_discrete(label = ctrl_labs) +
       scale_y_continuous(limits = c(lim1,lim2)) +
       theme_bw() +
-      theme(axis.text.x = element_text(size = 26,angle = 70,vjust = 1, hjust = 0.9),
+      theme(axis.text.x = element_text(size = 26,angle = 90, vjust = 0.5),
             axis.text.y = element_text(size = 25),
             axis.title = element_text(size = 28),
             plot.title = element_text(size = 22,face = "bold"),
@@ -924,7 +924,7 @@ iqr_boxplot_fixed_coords<-function(df,type,marker,control_list,batch_list,colour
       scale_x_discrete(label = control_list) +
       scale_y_continuous(limits = c(lim1,lim2)) +
       theme_bw() +
-      theme(axis.text.x = element_text(size = 26,angle = 70,vjust = 1, hjust = 0.9),
+      theme(axis.text.x = element_text(size = 26,angle = 90, vjust = 0.5),
             axis.text.y = element_text(size = 25),
             axis.title = element_text(size = 28),
             plot.title = element_text(size = 22,face = "bold"),
@@ -1257,7 +1257,7 @@ EMD_hmap<-function(emds_list,marker,control,batch_list,axis_size=18,threshold=5)
   }
   else {
     if(lim < 2) {
-      breaks<-seq(0,lim,by=0.01)
+      breaks<-seq(0,lim,by=0.0001)
     }
     else {
       breaks<-seq(0,lim)
@@ -1705,7 +1705,7 @@ ranked_flagged_hmap<-function(emd_df,iqr_df,batch_list,controls,markers,batch_co
 ##### png image dimensions functions #####
 image_width<-function(num_markers) {
   num_conditions<-4 ### +/-MFI, %pos, EMD assessments
-  size<-as.numeric((num_markers*num_conditions*100)+5000)
+  size<-as.numeric((num_markers*num_conditions*100)+7500)
 }
 
 image_height<-function(num_batch,num_controls) {
