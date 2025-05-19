@@ -99,6 +99,7 @@ suppressPackageStartupMessages(library(ggpmisc))
 suppressPackageStartupMessages(library(viridis))
 suppressPackageStartupMessages(library(shiny))
 suppressPackageStartupMessages(library(shinyjs))
+suppressPackageStartupMessages(library(shinyWidgets))
 suppressPackageStartupMessages(library(shinycssloaders))
 suppressPackageStartupMessages(library(bslib))
 suppressPackageStartupMessages(library(DT))
@@ -181,7 +182,7 @@ generate_number_of_cells_plot(df = ffdf, batch_colm = "batch", control_colm = "c
 #### axis size, plot width, and plot height are customizable
 generate_MDS_plot(df = ffdf, batch_colm = "batch", control_colm = "control", 
                   marker_list = markers,sample_colours = sample_colours, output_dir = output.dir, 
-                  axis_size = 15, width = 6.2, height = 6)
+                  axis_size = 15, width = 8, height = 7)
 
 #### UMAP of controls annotated by batch colours ####
 #### axis size, plot width, and plot height are customizable
