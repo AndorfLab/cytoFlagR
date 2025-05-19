@@ -369,7 +369,7 @@ generate_number_of_cells_plot<-function(df,batch_colm,control_colm,batch_list,
 
 generate_MDS_plot<-function(df,batch_colm,control_colm,marker_list,
                             sample_colours,output_dir,axis_size=15,
-                            width=6.2,height=6){
+                            width=8,height=7){
   
   file_name<-"MDS_per_control_sample.png"
   
@@ -423,8 +423,8 @@ generate_MDS_plot<-function(df,batch_colm,control_colm,marker_list,
   
   mds_plot<-ggplot(mdsdf, aes(x = MDS1, y = MDS2, color = control)) +
     geom_point(size = 2) +
-    geom_label_repel(aes(label = batch,fontface = 'bold',size=7.5), 
-                     max.overlaps = Inf) + # , show.legend = F
+    geom_label_repel(aes(label = batch,fontface = 'bold',size=5.2), 
+                     max.overlaps = Inf, , show.legend = F) + # 
     scale_color_manual("Control Sample",values = sample_colours) +
     coord_cartesian(xlim = c(min_lim,max_lim),ylim = c(min_lim,max_lim)) +
     ggplot2::guides(color = ggplot2::guide_legend(override.aes = list(size=4.3))) +
