@@ -826,7 +826,7 @@ iqr_boxplot<-function(df,type,marker,colours,batch_list,control_list,ctrl_labs=N
       xlab("Control Sample")+
       ylab(paste0(type))+
       theme_bw() +
-      theme(axis.text.x = element_text(size = 26,angle = 70,vjust = 1, hjust = 0.9),
+      theme(axis.text.x = element_text(size = 26,angle = 90, vjust = 0.5), # , hjust = 0.9
             axis.text.y = element_text(size = 25),
             axis.title = element_text(size = 28),
             plot.title = element_text(size = 22,face = "bold"),
@@ -850,7 +850,7 @@ iqr_boxplot<-function(df,type,marker,colours,batch_list,control_list,ctrl_labs=N
       xlab("Control Sample")+
       ylab(paste0(type))+
       theme_bw() +
-      theme(axis.text.x = element_text(size = 26,angle = 70,vjust = 1, hjust = 0.9),
+      theme(axis.text.x = element_text(size = 26,angle = 90, vjust = 0.5), # , hjust = 0.9
             axis.text.y = element_text(size = 25),
             axis.title = element_text(size = 28),
             plot.title = element_text(size = 22,face = "bold"),
