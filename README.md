@@ -21,11 +21,11 @@ With the advancement of cytometry techniques, researchers have the ability to cr
 
 ## Download cytoFlagR
 ```
-if(!require("devtools", character.only = TRUE, quietly = TRUE)) {
-  install.packages("devtools")
-}
-library(devtools)
-devtools::install_github('AndorfLab/cytoFlagR')
+Download zip from the `<>Code` button above
+
+Or use command line to download cytoFlagR using -
+
+git clone https://github.com/AndorfLab/cytoFlagR.git
 ```
 
 ## Dependencies
