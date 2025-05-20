@@ -25,7 +25,7 @@ if(!require("devtools", character.only = TRUE, quietly = TRUE)) {
   install.packages("devtools")
 }
 library(devtools)
-devtools::install_github('bioinfoSE/cytoFlagR')
+devtools::install_github('AndorfLab/cytoFlagR')
 ```
 
 ## Dependencies
