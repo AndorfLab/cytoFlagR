@@ -7,20 +7,22 @@ While this tool is designed to be primarily applied on control samples, it is al
 
 Please note: This tool is currently in development. Some documentation and code may change in the imminent future. Check back regularly for updates and report any issues you encounter.
 
-This tool consists of 5 main parts (each link leads to the relevant Wiki section):
+This tool consists of 6 main parts (each link leads to the relevant Wiki section):
 
-1.	[Pre-processing and Visual Assessment of the Data](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Wiki#step-1-pre-processing-and-visual-assessment-of-the-data)
-    * Samples (FCS files) are transformed and various plots (a MDS, UMAP, and barplot) are created
-2.	[An Interquartile Range (IQR)-Based Assessment](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Wiki#step-2-interquartile-range-iqr-based-assessment)
+1.	[Pre-processing and Visual Assessment of the Data](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Step-1:-Pre%E2%80%90processing-and-Visual-Assessment-of-the-Data)
+    * Transforms control samples (FCS files) and creates various plots (a MDS, UMAP, and bar plot) for initial data analysis 
+2.	[Interquartile Range (IQR)-Based Assessment](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Step-2:-Interquartile-Range-(IQR)%E2%80%90Based-Assessment)
     * Analyzes each marker in each control sample for the negative and positive populations, as well as the percent of positive cells
-3.	[An Earth Mover’s Distance (EMD)-Based Assessment](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Wiki#step-3-earth-movers-distance-emd-based-assessment)
+3.	[Earth Mover’s Distance (EMD)-Based Assessment](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Step-3:-Earth-Mover%E2%80%99s-Distance-(EMD)%E2%80%90Based-Assessment)
     * Uses the EMD equation for pairwise comparisons between every marker in the control samples
-4.	[A Comprehensive Summary of Results (Parts 2 and 3)](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Wiki#step-4-summary-of-results-for-parts-2-and-3)
-    * Provides the metrics and figures that indicate potential batch issues in the inputted data
-5.	[An Unsupervised Clustering Based Assessment](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Wiki#step-5-unsupervised-clustering-based-assessment)
-    *  Clusters the data to highlight batch issues present within the unique cell populations 
-
-Aditional information about the required input files and the example data are also available in the [Wiki](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Wiki/). 
+4.	[Summary of Results (for Steps 2 and 3)](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Step-4:-Summary-of-Results-(for-Steps-2-and-3))
+    * Creates a plot that summarizes the flags from the IQR-based and EMD-based assessments
+5.	[Unsupervised Clustering-Based Assessment](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Step-5:-Unsupervised-Clustering%E2%80%90Based-Assessment)
+    *  Clusters the data to highlight batch issues present within the cell populations
+6. [Summary of Results (for Steps 2, 3, and 5)](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Step-6:-Summary-of-Results-(for-Steps-2,-3,-and-5))
+   * Creates a plot that summarizes the flags from the IQR-based, EMD-based, and cluster-based assessments
+      
+Aditional information about the required input files and the example data are also available in the [Wiki](https://github.com/AndorfLab/CytoBatchFlagR/wiki). 
 
 ## Download
 The ZIP file containing all code can be downloaded by clicking on the *<>Code* button above.
