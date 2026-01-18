@@ -1,4 +1,58 @@
 # ======================================================================
+# Load libraries
+# ======================================================================
+
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(scales))
+suppressPackageStartupMessages(library(tidyr))
+suppressPackageStartupMessages(library(reshape2))
+suppressPackageStartupMessages(library(readxl))
+suppressPackageStartupMessages(library(readr))
+suppressPackageStartupMessages(library(matrixStats))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(ggpubr))
+suppressPackageStartupMessages(library(ggridges))
+suppressPackageStartupMessages(library(MASS))
+suppressPackageStartupMessages(library(RColorBrewer))
+suppressPackageStartupMessages(library(cowplot))
+suppressPackageStartupMessages(library(limma))
+suppressPackageStartupMessages(library(ggrepel))
+suppressPackageStartupMessages(library(emdist))
+suppressPackageStartupMessages(library(circlize))
+suppressPackageStartupMessages(library(gridExtra))
+suppressPackageStartupMessages(library(LaplacesDemon))
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(ComplexHeatmap))
+suppressPackageStartupMessages(library(flowCore))
+suppressPackageStartupMessages(library(FlowSOM))
+suppressPackageStartupMessages(library(ConsensusClusterPlus))
+suppressPackageStartupMessages(library(pheatmap))
+suppressPackageStartupMessages(library(umap))
+suppressPackageStartupMessages(library(stats))
+suppressPackageStartupMessages(library(progress))
+suppressPackageStartupMessages(library(crayon))
+suppressPackageStartupMessages(library(cluster))
+suppressPackageStartupMessages(library(patchwork))
+suppressPackageStartupMessages(library(ggpmisc))
+suppressPackageStartupMessages(library(viridis))
+suppressPackageStartupMessages(library(shiny))
+suppressPackageStartupMessages(library(shinyjs))
+suppressPackageStartupMessages(library(shinyWidgets))
+suppressPackageStartupMessages(library(shinycssloaders))
+suppressPackageStartupMessages(library(bslib))
+suppressPackageStartupMessages(library(DT))
+suppressPackageStartupMessages(library(rstudioapi))
+suppressPackageStartupMessages(library(grid))
+
+source("CytoBatchFlagR_functions.R")
+source("auto_threshold_func.R")
+source("auto_threshold_func_cytof.R")
+source("editMarkerTable.R")
+source("generate_marker_expression_densities.R")
+source("selectMarkerList.R")
+source("referenceMarkerSelection.R")
+
+# ======================================================================
 # Step 1: Pre-processing and Visual Assessment of the Data
 # ======================================================================
 
