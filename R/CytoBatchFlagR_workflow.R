@@ -246,6 +246,10 @@ print(dim(ffdf_sampled))
 
 # To further speed up the process, ref_subsampling can be set to "yes", which means the reference will be subsampled. Concurrently, the ref_subsampling_size can be set to a number, specifying number of cells per sample for reference subsampling. The seed can also be set to ensure reproducability. If ref_subsampling = "no", the reference will contain all cells.
 
+# If your data has a large amount batches, you may want to split the data into multiple plots to improve readability. The batches_per_plot parameter can be used in this cases. 
+# batches_per_plot indicates the maximum number of batches to include in each plot. For example, if you have 12 batches and batches_per_plot = 5, then for each marker you will have 3 plots (plot 1: batches 1-5, plot 2: batches 6-10, plot 3: batches 11-12)
+# batches_per_plot = NULL is used if you want to include all batches.
+
 # Once these plots are outputted, examine the densities to help determine if the automated cutoffs sufficiently split the marker expression values into a negative and positive population. 
 
 # Plot and save densities to pdf
@@ -265,7 +269,8 @@ write_density_plot_per_marker(marker_list = markers_1,
                               ref_subsampling = "yes", 
                               samps = sample_ids, 
                               ref_subsampling_size = 20000,
-                              seed = 350)
+                              seed = 350,
+                              batches_per_plot = NULL)
 
 # Based on your assessment of the data, you may want to edit some marker threshold values.
 
