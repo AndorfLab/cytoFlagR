@@ -420,7 +420,8 @@ write_density_plot_per_marker(marker_list = markers_1,
                               ref_subsampling = "yes", 
                               samps = sample_ids, 
                               ref_subsampling_size = 20000,
-                              seed = 350)
+                              seed = 350, 
+                              batches_per_plot = NULL)
 
 ```
 
@@ -1043,3 +1044,4 @@ generate_ranked_flagged_hmap_all(emd_df = emdf,
 ### Conclusion ###
 
 The outputted metrics and figures should provide you with a comprehensive assessment of your dataset. Now, you can determine the right solution to correct for these potential batch effects. It may be best to exclude potential problematic batches or markers altogether from your downstream analysis. Alternatively, you can apply a suitable batch normalization algorithm to your data.
+
