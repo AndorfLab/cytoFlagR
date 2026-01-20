@@ -3752,6 +3752,11 @@ proportion_of_batches_across_control_samples <- function(cluster_df,
   
   ctrl_labels <- setNames(as.character(seq_along(control_list)), control_list)
   
+  # Factor
+  combodf$batch <- factor(combodf$batch, levels = names(batch_colours) %||% batch_list)
+  flagged$batch <- factor(flagged$batch, levels = levels(combodf$batch))
+
+  # Plot
   plot <- ggplot(combodf, aes(control, proportion)) +
     geom_boxplot(
       outlier.color = NA,
@@ -3760,10 +3765,10 @@ proportion_of_batches_across_control_samples <- function(cluster_df,
       width = 0.6
     ) +
     geom_point(
-      aes(x = jitter_x, fill = batch),
+      aes(x = jitter_x, fill = batch, colour = batch),  # map BOTH
       size = 3.8,
       pch = 21,
-      colour = "#4D4D4D"
+      stroke = 0.4
     ) +
     geom_label_repel(
       data = flagged,
@@ -3771,8 +3776,9 @@ proportion_of_batches_across_control_samples <- function(cluster_df,
         x = jitter_x,
         y = proportion,
         label = batch,
-        color = batch
+        colour = batch
       ),
+      fill = "white",
       size = 6.8,
       show.legend = FALSE,
       force = 0.1,
@@ -3782,8 +3788,13 @@ proportion_of_batches_across_control_samples <- function(cluster_df,
       nudge_y = nudge_amount,
       segment.size = 0.4
     ) +
-    scale_fill_manual("Batch", values = batch_colours) +
-    { if (nrow(flagged) > 0) scale_color_manual(values = batch_colours) } +
+    # Single scale applied to BOTH colour and fill:
+    scale_colour_manual(
+      name = "Batch",
+      values = batch_colours,
+      breaks = levels(combodf$batch),
+      aesthetics = c("colour", "fill")
+    ) +
     facet_wrap(~ strip_lab, nrow = round(length(levels(prop_df$cluster)) / 2)) +
     scale_x_discrete(labels = ctrl_labels) +
     xlab("Controls") +
@@ -4572,3 +4583,4 @@ generate_ranked_flagged_hmap_all <- function(emd_df,
     }
   }
 }
+
