@@ -5,8 +5,6 @@ The CytoBatchFlagR tool intakes cytometry data and outputs information about pot
 
 While this tool is designed to be primarily applied on control samples, it is also able to assess biological samples. However, users should take into consideration the inherent biological variability between their biological samples while interpreting the outcome of CytoBatchFlagR.
 
-Please note: This tool is currently in development. Some documentation and code may change in the imminent future. Check back regularly for updates and report any issues you encounter.
-
 This tool consists of 6 main parts (each link leads to the relevant Wiki section):
 
 1.	[Pre-processing and Visual Assessment of the Data](https://github.com/AndorfLab/CytoBatchFlagR/wiki/Step-1:-Pre%E2%80%90processing-and-Visual-Assessment-of-the-Data)
