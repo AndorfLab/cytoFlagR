@@ -179,7 +179,7 @@ source("referenceMarkerSelection.R")
 
 Select the folder that contains the FCS files, FCS metadata file, and marker information file. Make sure this folder is unzipped.
 
-For more information about the format these files should be in, please go here: https://github.com/AndorfLab/CytoBatchFlagR/wiki/Wiki#required-input-files
+For more information about the format these files should be in, please go here: https://github.com/AndorfLab/CytoBatchFlagR/wiki/Input-Files
 
 ```{r Set directory to read files}
 
@@ -1046,5 +1046,6 @@ generate_ranked_flagged_hmap_all(emd_df = emdf,
 ### Conclusion ###
 
 The outputted metrics and figures should provide you with a comprehensive assessment of your dataset. Now, you can determine the right solution to correct for these potential batch effects. It may be best to exclude potential problematic batches or markers altogether from your downstream analysis. Alternatively, you can apply a suitable batch normalization algorithm to your data.
+
 
 
