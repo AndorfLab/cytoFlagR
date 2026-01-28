@@ -58,7 +58,7 @@ source("referenceMarkerSelection.R")
 
 # Select the folder that contains the FCS files, FCS metadata file, and marker information file. Make sure this folder is unzipped.
 
-# For more information about the format these files should be in, please go here: https://github.com/AndorfLab/CytoBatchFlagR/wiki/Wiki#required-input-files
+# For more information about the format these files should be in, please go here: https://github.com/AndorfLab/CytoBatchFlagR/wiki/Input-Files
 
 # Folder where CytoBatchFlagR and related files are stored
 work.dir <- getwd() 
