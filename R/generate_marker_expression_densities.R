@@ -358,7 +358,7 @@ write_density_plot_per_marker <- function(marker_list,
         axis_size = axis_size,
         ref_subsampling = ref_subsampling,
         samps = samps_chunk,                      
-        ref_subsampling_size = eff_ref_size,      
+        ref_subsampling_size = ref_subsampling_size,      
         seed = seed
       )
       
@@ -631,4 +631,5 @@ draw_biaxial_dotplots <- function(df,
   # Notify user of completion
   cat("Biaxial plots saved in", output_dir, "\n")
 }
+
 
