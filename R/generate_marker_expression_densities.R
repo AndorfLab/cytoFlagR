@@ -1,4 +1,3 @@
-#!/usr/bin/env R
 
 ########### ~~~~ Required Libraries ~~~~ ###########
 suppressPackageStartupMessages(library(dplyr))
@@ -52,7 +51,9 @@ subsample_for_density_plots_refs <- function(df,
   ncells$batch <- df$batch[mm]
   
   # Global min across all samples in this df
-  global_min <- suppressWarnings(min(ncells$Freq, na.rm = TRUE))
+#  global_min <- suppressWarnings(min(ncells$Freq, na.rm = TRUE))
+  global_min <- suppressWarnings(min(ncells$Freq[ncells$Freq > 0], na.rm = TRUE))
+  
   if (!is.finite(global_min)) global_min <- 0L
   
   # Per-batch min across samples within each batch (for 'batch_min')
@@ -150,8 +151,12 @@ density_plots_w_thresholds <- function(df,
                                        ref_subsampling_size,
                                        seed) {
   
+  if (nrow(df) == 0) {
+    return(NULL)
+  }
+  
   # Restrict samps to df 
-  samps <- intersect(samps, unique(df$sample_id))
+  samps <- unique(df$sample_id)
   
   if (identical(tolower(ref_subsampling), "no")) {
     
@@ -167,23 +172,32 @@ density_plots_w_thresholds <- function(df,
   } else {
     
     ggd_bg <- subsample_for_density_plots_refs(
-      df = df, samps = samps, ref_subsampling_size = ref_subsampling_size, seed = seed
+      df = df,
+      samps = samps,
+      ref_subsampling_size = ref_subsampling_size,
+      seed = seed
     )
-    
-    ggd_bg$min_cells <- NULL
     
     mdf <- data.frame(df)
     mdf$reference <- "no"
     
-    ggd_bg$batch <- "ref"
-    ggd_bg$reference <- "yes"
+    if (nrow(ggd_bg) > 0) {
+      ggd_bg$batch <- "ref"
+      ggd_bg$reference <- "yes"
+      ggd_plot <- rbind(mdf, ggd_bg)
+    } else {
+      # No reference cells available
+      ggd_plot <- mdf
+    }
     
-    ggd_plot <- rbind(mdf, ggd_bg)
   }
   
   # Factor levels 
-  ggd_plot$control <- factor(ggd_plot$control, levels = control_list)
-  ggd_plot$batch   <- factor(ggd_plot$batch,   levels = c(rev(batch_list), "ref"))
+  ggd_plot$control <- factor(ggd_plot$control, levels = control_list) 
+  
+  actual_batches <- unique(as.character(df$batch)) 
+  
+  ggd_plot$batch <- factor( ggd_plot$batch, levels = c(actual_batches, "ref"))
   
   # Plot
   ggplot() +
@@ -221,9 +235,15 @@ reshape_df <- function(df,
                        markers) {
   
   # Melt marker columns into long format with expression values
-  molten_df <- melt(data.frame(df[,markers],sample_id = df[,"sample_id"]),
-                    id.vars = "sample_id",variable.name = "marker",
-                    value.name = "expression")
+  molten_df <- reshape2::melt(
+    data.frame(df[, markers, drop = FALSE],
+               sample_id = df[,"sample_id"],
+               check.names = FALSE,    
+               stringsAsFactors = FALSE),
+    id.vars = "sample_id",
+    variable.name = "marker",
+    value.name = "expression"
+  )
   
   # Match sample_id to append batch and control labels
   mm <- match(molten_df$sample_id,df$sample_id)
@@ -346,8 +366,15 @@ write_density_plot_per_marker <- function(marker_list,
       mdf_chunk <- mdf[!is.na(mdf[[batch_colm]]) & mdf[[batch_colm]] %in% batch_chunk, , drop = FALSE]
       mdf_chunk <- droplevels(mdf_chunk)
       
-      # Limit samps to those present in this chunk to avoid empty sampling loops
-      samps_chunk <- intersect(samps, unique(mdf_chunk$sample_id))
+      # Skip if nothing to plot in this chunk
+      if (nrow(mdf_chunk) == 0L) {
+        cat(sprintf("Marker %d/%d (%s), split %d/%d is empty — skipping\n",
+                    i, total_iter, mk, chunk_idx, length(batch_chunks)))
+        pBar$tick()
+        next
+      }
+      
+      samps = unique(mdf_chunk$sample_id)
       
       plt <- density_plots_w_thresholds(
         df = mdf_chunk,
@@ -362,8 +389,10 @@ write_density_plot_per_marker <- function(marker_list,
         seed = seed
       )
       
-      # Each print() adds a page to the PDF
-      print(plt)
+      # Each print() adds a page to the PDF, if not null
+      if (!is.null(plt)) {
+        print(plt)
+      }
       
       if (is.null(batches_per_plot)) { 
         cat(sprintf("Marker %d/%d (%s) plotted\n",
@@ -387,6 +416,148 @@ write_density_plot_per_marker <- function(marker_list,
   # Notify user of completion
   cat("All density plots saved as", pdf_file_path, "\n")
 }
+
+write_density_plot_per_marker <- function(marker_list,
+                                          df, 
+                                          batch_list, 
+                                          control_list, 
+                                          auto_cutoffs, 
+                                          batch_colm, 
+                                          control_colm, 
+                                          output_dir, 
+                                          wd = 12, 
+                                          ht = 11, 
+                                          axis_size = 14, 
+                                          file_name = "marker_expression_densities",
+                                          ref_subsampling, 
+                                          samps, 
+                                          ref_subsampling_size = 1000,
+                                          seed,
+                                          batches_per_plot = NULL) {
+  
+  # Inform user that the process may take a while
+  cat("This process may take a long time, please be patient\n")
+  
+  # Reproducibility
+  if (!is.null(seed)) set.seed(seed)
+  
+  # Color for progress bar text
+  colrSet <- crayon::make_style("#539DDD")
+  
+  # Determine total number of markers to plot
+  total_iter <- length(marker_list)
+  
+  # Handle batches_per_plot 
+  if (is.null(batches_per_plot)) {
+    batches_per_plot2 <- length(batch_list)
+  } else if (batches_per_plot <= 0L) {
+    stop("batches_per_plot must be >= 1")
+  } else {
+    batches_per_plot2 <- as.integer(batches_per_plot)
+  }
+  
+  # Ensure sample_id column exists
+  if (!("sample_id" %in% names(df))) {
+    df[, "sample_id"] <- paste0(df[, batch_colm], "_", df[, control_colm])
+  }
+  
+  # Normalize to standard internal names used throughout plotting helpers
+  if (batch_colm != "batch")   df[["batch"]]   <- df[[batch_colm]]
+  if (control_colm != "control") df[["control"]] <- df[[control_colm]]
+
+  # Reshape dataframe for plotting 
+  cdf <- data.frame(reshape_df(df, control_colm, batch_colm, marker_list))
+
+  # Restrict splits to batches actually present after reshape
+  present_batches <- unique(as.character(cdf$batch))
+  batch_list_effective <- intersect(batch_list, present_batches)
+  if (length(batch_list_effective) == 0L) {
+    stop("None of the batches in 'batch_list' are present in the data after reshaping.")
+  }
+  nb <- length(batch_list_effective)
+  
+  # Build batch chunks 
+  batch_chunk_starts <- seq(1L, nb, by = batches_per_plot2)
+  batch_chunks <- lapply(batch_chunk_starts, function(b_start) {
+    b_end <- min(b_start + batches_per_plot2 - 1L, nb)
+    batch_list_effective[b_start:b_end]
+  })
+  
+  # One PDF for everything
+  pdf_file_name <- paste0(file_name, ".pdf")
+  pdf_file_path <- file.path(output_dir, pdf_file_name)
+  pdf(pdf_file_path, width = wd, height = ht, useDingbats = FALSE)
+  
+  for (i in seq_along(marker_list)) {
+    mk <- marker_list[i]
+    
+    # Progress bar per marker
+    pBar <- progress::progress_bar$new(
+      format = paste0(colrSet("Plotting densities for marker '"), colrSet(mk), colrSet("'")),
+      total = length(batch_chunks),
+      clear = FALSE,
+      width = 60
+    )
+    
+    # Subset once for this marker
+    mdf <- cdf[(cdf$marker == mk), , drop = FALSE]
+    mdf$marker <- as.character(mdf$marker)
+    
+    # Retrieve automated cutoff for current marker
+    cutv <- auto_cutoffs[auto_cutoffs$marker == mk, "cutoff"]
+    cutf <- if (length(cutv) == 1 && is.finite(cutv)) as.numeric(cutv) else NA_real_
+    
+    # Iterate over batch chunks for the marker
+    for (chunk_idx in seq_along(batch_chunks)) {
+      batch_chunk <- batch_chunks[[chunk_idx]]
+      
+      # Restrict data to current batch chunk using column name
+      mdf_chunk <- mdf[!is.na(mdf$batch) & mdf$batch %in% batch_chunk, , drop = FALSE]
+      mdf_chunk <- droplevels(mdf_chunk)
+      
+      if (nrow(mdf_chunk) == 0L) {
+        cat(sprintf("Marker %d/%d (%s), split %d/%d is empty — skipping\n",
+                    i, total_iter, mk, chunk_idx, length(batch_chunks)))
+        pBar$tick()
+        next
+      }
+      
+      # Limit samps to those present in this chunk
+      samps_chunk <- intersect(samps, unique(mdf_chunk$sample_id))
+      
+      # Plot for this chunk
+      plt <- density_plots_w_thresholds(
+        df = mdf_chunk,
+        marker = mk,
+        batch_list = batch_chunk,
+        control_list = control_list,
+        cutf = cutf,
+        axis_size = axis_size,
+        ref_subsampling = ref_subsampling,
+        samps = samps_chunk,
+        ref_subsampling_size = ref_subsampling_size,
+        seed = seed
+      )
+      
+      if (!is.null(plt)) {
+        print(plt)
+      }
+      
+      if (is.null(batches_per_plot)) { 
+        cat(sprintf("Marker %d/%d (%s) plotted\n", i, total_iter, mk))
+        pBar$tick()
+      } else {
+        cat(sprintf("Marker %d/%d (%s), split %d/%d plotted\n",
+                    i, total_iter, mk, chunk_idx, length(batch_chunks)))
+        pBar$tick()
+      }
+    }
+  }
+  
+  dev.off()
+  cat("All density plots saved as", pdf_file_path, "\n")
+}
+
 
 ########### ~~~~ Marker Expression Biaxial Dotplots ~~~~ ###########
 
@@ -631,5 +802,6 @@ draw_biaxial_dotplots <- function(df,
   # Notify user of completion
   cat("Biaxial plots saved in", output_dir, "\n")
 }
+
 
 
