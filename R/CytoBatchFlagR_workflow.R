@@ -188,10 +188,6 @@ markers_1 <- selectMarkerList(marker_tbl,
 
 # First, the tool generates automated marker thresholds for each marker in the dataset. These thresholds split the data into positive and negative groups.
 
-# Make sure you set: 
-# - dataset_type = "flow" for spectral or conventional flow cytometry datasets
-# - dataset_type = "mass" for mass cytometry (CyTOF) datasets
-
 # Depending on how large your data is, this process could take a long time to run. You may want to subsample cells by setting subsample = "yes" and specifying the number of cells by setting num. 
 
 # Subsample: change to "yes" if you want CytoBatchFlagR to subsample your data to calculate the marker thresholds
