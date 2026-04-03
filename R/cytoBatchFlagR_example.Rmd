@@ -167,7 +167,6 @@ Using *source()* allows you to read in the R functions that make up CytoBatchFla
 
 source("CytoBatchFlagR_functions.R")
 source("auto_threshold_func.R")
-source("auto_threshold_func_cytof.R")
 source("editMarkerTable.R")
 source("generate_marker_expression_densities.R")
 source("selectMarkerList.R")
