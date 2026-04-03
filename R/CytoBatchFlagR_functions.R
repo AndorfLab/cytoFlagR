@@ -3361,7 +3361,7 @@ proportion_of_batches_per_cluster <- function(cluster_df,
       stat = "identity",
       width = 0.78,                      
       color = ifelse(prop_df$highlight, "black", NA),  
-      size = 1.5                           
+      linewidth = 1.5                           
     ) +
     scale_fill_manual("Batch", values = batch_colours) +
     xlab("Batch Proportions") +
