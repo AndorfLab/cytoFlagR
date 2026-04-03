@@ -240,7 +240,7 @@ print(dim(ffdf_sampled))
 
 # To further speed up the process, ref_subsampling can be set to "yes", which means the reference will be subsampled. Concurrently, the ref_subsampling_size can be set to a number, specifying number of cells per sample for reference subsampling. The seed can also be set to ensure reproducability. If ref_subsampling = "no", the reference will contain all cells.
 
-# If your data has a large amount batches, you may want to split the data into multiple plots to improve readability. The batches_per_plot parameter can be used in this cases. 
+# If your data has a large amount of batches, you may want to split the data into multiple plots to improve readability. The batches_per_plot parameter can be used in this case.  
 # batches_per_plot indicates the maximum number of batches to include in each plot. For example, if you have 12 batches and batches_per_plot = 5, then for each marker you will have 3 plots (plot 1: batches 1-5, plot 2: batches 6-10, plot 3: batches 11-12)
 # batches_per_plot = NULL is used if you want to include all batches.
 
@@ -273,7 +273,7 @@ write_density_plot_per_marker(marker_list = markers_1,
 # Launch interface to update your marker thresholds
 editMarkerTable(auto_cutoffs)
 
-# After downloading the file, the new cutoffs are saved and assigned as updated_auto_cutoffs.
+# After downloading the file, the new cutoffs are saved and assigned in R as updated_auto_cutoffs.
 
 # If you want to further examine the new automated cutoffs, you can optionally choose to re-plot marker expression densities across controls and batches with the new automated cutoffs.
 
