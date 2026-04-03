@@ -352,7 +352,7 @@ auto_cutoffs <- data.frame(automated_threshold_DF(df = ffdf,
                                                   batch_list = batches,
                                                   batch_colm = "batch", 
                                                   subsample = "no", 
-                                                  seed = 350,
+                                                  seed = 450,
                                                   num = 20000,
                                                   dataset_type = "flow",
                                                   output_dir = output.dir))
@@ -422,7 +422,7 @@ write_density_plot_per_marker(marker_list = markers_1,
                               ref_subsampling = "yes", 
                               samps = sample_ids, 
                               ref_subsampling_size = 20000,
-                              seed = 350, 
+                              seed = 450, 
                               batches_per_plot = NULL)
 
 ```
@@ -459,7 +459,7 @@ write_density_plot_per_marker(marker_list = markers_1,
                               file_name = "marker_expression_densities_updated_cutoffs", 
                               ref_subsampling = "yes", 
                               samps = sample_ids,
-                              seed = 350)
+                              seed = 450)
 
 ```
 
@@ -565,7 +565,7 @@ generate_IQR_metric_boxplots(iqr.plt = iqrdf,
                              output_dir = output.dir, 
                              width = 11, 
                              height = 10,
-                             seed = 350)
+                             seed = 450)
 
 # +MFI
 # Boxplots with flags
@@ -579,7 +579,7 @@ generate_IQR_metric_boxplots(iqr.plt = iqrdf,
                              output_dir = output.dir, 
                              width = 11, 
                              height = 10,
-                             seed = 350)
+                             seed = 450)
 
 # %pos
 # Boxplots with flags
@@ -593,7 +593,7 @@ generate_IQR_metric_boxplots(iqr.plt = iqrdf,
                              output_dir = output.dir, 
                              width = 11, 
                              height = 10,
-                             seed = 350)
+                             seed = 450)
 
 ```
 
@@ -623,7 +623,7 @@ generate_fixed_IQR_metric_boxplots(iqr.plt = iqrdf,
                                    height = 10,
                                    ctrl_labs = controls,
                                    y_limits = "auto",
-                                   seed = 350)
+                                   seed = 450)
 
 # +MFI
 # Boxplots with flags 
@@ -638,7 +638,7 @@ generate_fixed_IQR_metric_boxplots(iqr.plt = iqrdf,
                                    height = 10,
                                    ctrl_labs = controls,
                                    y_limits = "auto",
-                                   seed = 350)
+                                   seed = 450)
 
 # %pos
 # Boxplots with flags 
@@ -653,7 +653,7 @@ generate_fixed_IQR_metric_boxplots(iqr.plt = iqrdf,
                                    height = 10, 
                                    ctrl_labs = controls,
                                    y_limits = "auto",
-                                   seed = 350)
+                                   seed = 450)
 
 ```
 
@@ -700,7 +700,7 @@ pairwise_EMDs_per_marker <- EMD_list(df = cdf,
                                      batch_list = batches, 
                                      control_list = controls, 
                                      num = 20000,
-                                     seed = 350)
+                                     seed = 450)
 
 # Optionally, save EMD matrix list
 # saveRDS(pairwise_EMDs_per_marker, 
@@ -838,7 +838,7 @@ num <- 50000
 meta_cluster_num <- 8
 
 # Seed for reproducability 
-seed <- 350
+seed <- 450
 
 # Set threshold 1
 # If the contribution of cells from a batch in a given cluster is
@@ -1000,7 +1000,7 @@ generate_cluster_UMAP(df = filter_df,
                       marker_list = pheno_markers, 
                       batch_list = batches, 
                       batch_colours = batchColours, 
-                      seed = 350,
+                      seed = 450,
                       num = 2000,
                       output_dir = output.dir, 
                       axis_size = 24, 
