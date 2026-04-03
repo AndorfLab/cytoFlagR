@@ -653,7 +653,6 @@ Lastly, you may want to remove some objects that are loaded into R to save space
 
 ```{r remove objects}
 
-rm(unimodal_and_bimodal_markers)
 rm(auto_cutoffs)
 rm(updated_auto_cutoffs)
 rm(ffdf_sampled)
