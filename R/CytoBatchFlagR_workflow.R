@@ -201,7 +201,7 @@ auto_cutoffs <- data.frame(automated_threshold_DF(df = ffdf,
                                                   control_list = controls, 
                                                   batch_list = batches,
                                                   batch_colm = "batch", 
-                                                  subsample = "no", 
+                                                  subsample = "yes", 
                                                   seed = 450,
                                                   num = 20000,
                                                   output_dir = output.dir))
@@ -219,6 +219,8 @@ auto_cutoffs <- data.frame(automated_threshold_DF(df = ffdf,
 # When sampling_type = "fixed", you must have n_cells set. n_cells should be an integer specifying how many cells to take per sample.
 
 # The subsampling done here will be used when making the density and biaxial plots  
+
+set.seed(450)
 
 # Set sampling type
 # Set as "fixed", "overall_min", "batch_min", or "none" 
@@ -265,7 +267,7 @@ write_density_plot_per_marker(marker_list = markers_1,
                               ref_subsampling = "yes", 
                               samps = sample_ids, 
                               ref_subsampling_size = 20000,
-                              seed = 450,
+                              seed = 450, 
                               batches_per_plot = NULL)
 
 # Based on your assessment of the data, you may want to edit some marker threshold values.
