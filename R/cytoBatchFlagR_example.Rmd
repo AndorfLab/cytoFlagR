@@ -450,8 +450,10 @@ write_density_plot_per_marker(marker_list = markers_1,
                               axis_size = 14, 
                               file_name = "marker_expression_densities_updated_cutoffs", 
                               ref_subsampling = "yes", 
-                              samps = sample_ids,
-                              seed = 450)
+                              samps = sample_ids, 
+                              ref_subsampling_size = 20000,
+                              seed = 450, 
+                              batches_per_plot = NULL)
 
 ```
 
@@ -465,9 +467,25 @@ This process can be very slow and may take a while to generate plots, depending 
 ref_marker <- referenceMarkerSelection(marker_tbl, 
                                        column_name = "PnS")
 
-# Pick a sampling_type for the biaxial plots: "overall_min" or "batch_min"
-# "overall_min": pick the minimum number of cells of any file as sampling size (quicker plot)
-# "batch_min": the minimum number of cells of a file in a batch as sample size (very slow) 
+# This can be very slow, you may want to subsample more before proceeding
+# Set sampling type
+# Set as "fixed", "overall_min", "batch_min", or "none" 
+sampling_type <-  "fixed"  
+
+# This will only be used if "fixed" was chosen for sampling_type
+n_cells <- 15000
+
+# Show original number of rows and columns of the cytometry data
+print(dim(ffdf))
+
+# Subsample data
+ffdf_sampled <- sample_cells(df = ffdf, 
+                             sampling_type = sampling_type, 
+                             n_cells = n_cells)
+
+# Show post-subsampled number of rows and columns of the cytometry data
+print(dim(ffdf_sampled))
+
 # Axis size, plot width, and plot height are customizable
 draw_biaxial_dotplots(df = ffdf_sampled, 
                       ref_marker = ref_marker, 
