@@ -205,7 +205,7 @@ auto_cutoffs <- data.frame(automated_threshold_DF(df = ffdf,
                                                   batch_list = batches,
                                                   batch_colm = "batch", 
                                                   subsample = "no", 
-                                                  seed = 350,
+                                                  seed = 450,
                                                   num = 20000,
                                                   dataset_type = "flow",
                                                   output_dir = output.dir))
@@ -269,7 +269,7 @@ write_density_plot_per_marker(marker_list = markers_1,
                               ref_subsampling = "yes", 
                               samps = sample_ids, 
                               ref_subsampling_size = 20000,
-                              seed = 350,
+                              seed = 450,
                               batches_per_plot = NULL)
 
 # Based on your assessment of the data, you may want to edit some marker threshold values.
@@ -298,7 +298,7 @@ write_density_plot_per_marker(marker_list = markers_1,
                               file_name = "marker_expression_densities_updated_cutoffs", 
                               ref_subsampling = "yes", 
                               samps = sample_ids,
-                              seed = 350)
+                              seed = 450)
 
 # Next, you can generate biaxial dot plots against a reference marker.
 
@@ -390,7 +390,7 @@ generate_IQR_metric_boxplots(iqr.plt = iqrdf,
                              output_dir = output.dir, 
                              width = 11, 
                              height = 10,
-                             seed = 350)
+                             seed = 450)
 
 # +MFI
 # Boxplots with flags
@@ -404,7 +404,7 @@ generate_IQR_metric_boxplots(iqr.plt = iqrdf,
                              output_dir = output.dir, 
                              width = 11, 
                              height = 10,
-                             seed = 350)
+                             seed = 450)
 
 # %pos
 # Boxplots with flags
@@ -418,7 +418,7 @@ generate_IQR_metric_boxplots(iqr.plt = iqrdf,
                              output_dir = output.dir, 
                              width = 11, 
                              height = 10,
-                             seed = 350)
+                             seed = 450)
 
 # The boxplots below have fixed axes, meaning the axes are set to be the same across all boxplots per metric. This is done to have a standard comparison with the same axes across all the markers.
 
@@ -444,7 +444,7 @@ generate_fixed_IQR_metric_boxplots(iqr.plt = iqrdf,
                                    height = 10,
                                    ctrl_labs = controls,
                                    y_limits = "auto",
-                                   seed = 350)
+                                   seed = 450)
 
 # +MFI
 # Boxplots with flags 
@@ -459,7 +459,7 @@ generate_fixed_IQR_metric_boxplots(iqr.plt = iqrdf,
                                    height = 10,
                                    ctrl_labs = controls,
                                    y_limits = "auto",
-                                   seed = 350)
+                                   seed = 450)
 
 # %pos
 # Boxplots with flags 
@@ -474,7 +474,7 @@ generate_fixed_IQR_metric_boxplots(iqr.plt = iqrdf,
                                    height = 10, 
                                    ctrl_labs = controls,
                                    y_limits = "auto",
-                                   seed = 350)
+                                   seed = 450)
 
 # Lastly, you may want to remove some objects that are loaded into R to save space before moving on to the next step.
 
@@ -511,7 +511,7 @@ pairwise_EMDs_per_marker <- EMD_list(df = cdf,
                                      batch_list = batches, 
                                      control_list = controls, 
                                      num = 20000,
-                                     seed = 350)
+                                     seed = 450)
 
 # Optionally, save EMD matrix list
 # saveRDS(pairwise_EMDs_per_marker, 
