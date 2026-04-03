@@ -46,7 +46,6 @@ suppressPackageStartupMessages(library(grid))
 
 source("CytoBatchFlagR_functions.R")
 source("auto_threshold_func.R")
-source("auto_threshold_func_cytof.R")
 source("editMarkerTable.R")
 source("generate_marker_expression_densities.R")
 source("selectMarkerList.R")
