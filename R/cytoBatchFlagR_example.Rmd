@@ -341,8 +341,6 @@ Make sure you set:
 
 ```{r Automated Marker Threshold Calculation}
 
-# Dataset type: use "flow" if using spectral or conventional flow data
-# Alternatively, use "mass" for CyTOF data
 # Subsample: change to "yes" if you want CytoBatchFlagR to subsample your data to calculate the marker thresholds
 # If you set subsample = "yes", the seed and number of cells per batch to downsample to (num) should also be set
 auto_cutoffs <- data.frame(automated_threshold_DF(df = ffdf, 
