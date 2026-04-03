@@ -805,12 +805,12 @@ First, choose the markers you want to include for clustering. That can either be
 
 ```{r Select markers to use for clustering, close the app to save list}
 
-# Select the markers used for clustering in this pop-up window
-# Click 'Done' once markers are chosen
-pheno_markers <- selectMarkerList(marker_tbl, column_name = "PnS")
+# Select all 'phenotype/lineage' markers for clustering
+pheno_markers <- as.character(marker_tbl[which(marker_tbl$status=="phenotype"),"PnS"])
 
-# Alternatively, use this if you want to select all 'phenotype/lineage' markers
-# pheno_markers <- as.character(marker_tbl[which(marker_tbl$status=="phenotype"),"PnS"])
+# Alternatively, select the markers used for clustering in this pop-up window
+# Click 'Done' once markers are chosen
+# pheno_markers <- selectMarkerList(marker_tbl, column_name = "PnS")
 
 ```
 
