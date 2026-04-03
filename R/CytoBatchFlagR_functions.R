@@ -610,6 +610,49 @@ subsample_batch <- function(df,
   return(rdf)
 }
 
+subsample_batch <- function(df,
+                            batch_list,
+                            batch_colm,
+                            num,
+                            seed) {
+  
+  # Check if df is a data frame
+  stopifnot(is.data.frame(df))
+  
+  # Check if batch column names are in the data frame
+  if (!batch_colm %in% names(df)) {
+    stop(sprintf("Column '%s' not found in df.", batch_colm))
+  }
+  
+  # Keep only requested batches 
+  if (!missing(batch_list) && length(batch_list) > 0) {
+    df <- df[df[[batch_colm]] %in% batch_list, , drop = FALSE]
+  }
+  
+  if (nrow(df) == 0L) {
+    warning("subsample_batch(): input df is empty after filtering.")
+    return(df)
+  }
+  
+  # Set seed
+  set.seed(seed)
+  
+  # Split by batch and sample per batch
+  by_batch <- split(df, df[[batch_colm]])
+  
+  sampled <- lapply(by_batch, function(d) {
+    n <- nrow(d)
+    size <- min(num, n)  
+    if (n == 0L) return(d[integer(0), , drop = FALSE])
+    idx <- sample.int(n, size = size, replace = FALSE)
+    d[idx, , drop = FALSE]
+  })
+  
+  out <- do.call(rbind, sampled)
+  rownames(out) <- NULL
+  out
+}
+
 ### Checks unimodality of marker distributions across control samples
 # df: A dataframe containing marker expression columns and a 'control' column
 # markers: A character vector of marker column names 
@@ -4583,4 +4626,5 @@ generate_ranked_flagged_hmap_all <- function(emd_df,
     }
   }
 }
+
 
