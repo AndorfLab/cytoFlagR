@@ -472,7 +472,6 @@ generate_fixed_IQR_metric_boxplots(iqr.plt = iqrdf,
 
 # Lastly, you may want to remove some objects that are loaded into R to save space before moving on to the next step.
 
-rm(unimodal_and_bimodal_markers)
 rm(auto_cutoffs)
 rm(updated_auto_cutoffs)
 rm(ffdf_sampled)
