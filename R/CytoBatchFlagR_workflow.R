@@ -599,12 +599,12 @@ generate_ranked_flagged_hmap(emd_df = emdf,
 # - Selecting the markers in a pop-up window, or
 # - If a 'status' column was included in the marker file, then filtering by values in that column
 
-# Select the markers used for clustering in this pop-up window
-# Click 'Done' once markers are chosen
-pheno_markers <- selectMarkerList(marker_tbl, column_name = "PnS")
+# Select all 'phenotype/lineage' markers for clustering
+pheno_markers <- as.character(marker_tbl[which(marker_tbl$status=="phenotype"),"PnS"])
 
-# Alternatively, use this if you want to select all 'phenotype/lineage' markers
-# pheno_markers <- as.character(marker_tbl[which(marker_tbl$status=="phenotype"),"PnS"])
+# Alternatively, select the markers used for clustering in this pop-up window
+# Click 'Done' once markers are chosen
+# pheno_markers <- selectMarkerList(marker_tbl, column_name = "PnS")
 
 # Once the markers have been selected, set some parameters. This should include the number of cells to randomly downsample to, the number of metaclusters to make in the unsupervised clustering algorithm, and thresholds 1 and 2. 
 
