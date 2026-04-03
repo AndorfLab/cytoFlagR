@@ -335,10 +335,6 @@ This section handles the IQR-based assessment.
 
 First, the tool generates automated marker thresholds for each marker in the dataset. These thresholds split the data into positive and negative groups.
 
-Make sure you set: 
-  - dataset_type = "flow" for spectral or conventional flow cytometry datasets
-- dataset_type = "mass" for mass cytometry (CyTOF) datasets
-
 ```{r Automated Marker Threshold Calculation}
 
 # Subsample: change to "yes" if you want CytoBatchFlagR to subsample your data to calculate the marker thresholds
