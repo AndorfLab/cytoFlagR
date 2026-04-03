@@ -353,7 +353,6 @@ auto_cutoffs <- data.frame(automated_threshold_DF(df = ffdf,
                                                   subsample = "no", 
                                                   seed = 450,
                                                   num = 20000,
-                                                  dataset_type = "flow",
                                                   output_dir = output.dir))
 
 ```
