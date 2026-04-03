@@ -194,8 +194,6 @@ markers_1 <- selectMarkerList(marker_tbl,
 
 # Depending on how large your data is, this process could take a long time to run. You may want to subsample cells by setting subsample = "yes" and specifying the number of cells by setting num. 
 
-# Dataset type: use "flow" if using spectral or conventional flow data
-# Alternatively, use "mass" for CyTOF data
 # Subsample: change to "yes" if you want CytoBatchFlagR to subsample your data to calculate the marker thresholds
 # If you set subsample = "yes", the seed and number of cells per batch to downsample to (num) should also be set
 auto_cutoffs <- data.frame(automated_threshold_DF(df = ffdf, 
@@ -206,7 +204,6 @@ auto_cutoffs <- data.frame(automated_threshold_DF(df = ffdf,
                                                   subsample = "no", 
                                                   seed = 450,
                                                   num = 20000,
-                                                  dataset_type = "flow",
                                                   output_dir = output.dir))
 
 # Next, density plots and biaxial plots can be created to visualize the data and help determine if the automated marker thresholds are sufficient or if they should be overriden. 
