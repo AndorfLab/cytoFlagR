@@ -57,23 +57,33 @@ density_with_trim <- function(v, ...) {
 # subsample: Can be either "yes" or "no". Whether to subsample per batch prior to thresholding
 # seed: Integer seed for reproducibility of random sampling
 # num: Number of cells to subsample per batch (only done if subsample = "yes")
+# width_cutoff: For bimodal. Minimum allowable peak width (set to exclude spurious narrow peaks)
+# sep_peaks: For bimodal. Minimum separation required between peaks
+# dip_cutoff: For bimodal. Minimum dip strength (valley) required between peaks 
+# min_peak_height_frac: For bimodal. Minimum relative peak height as a fraction of max peak
+# shoulder_frac: For unimodal. Fraction of peak density height used to define the shoulder
 # output_dir: Directory where the CSV will be saved
 # Returns a dataframe with one row per marker and the median cutoff value
 automated_threshold_DF <- function(df,
-                                    markers,
-                                    control_list,
-                                    batch_list,
-                                    batch_colm,
-                                    subsample = "yes",
-                                    seed = 450,
-                                    num = 20000,
-                                    output_dir) {
+                                   markers,
+                                   control_list,
+                                   batch_list,
+                                   batch_colm,
+                                   subsample = "yes",
+                                   seed = 450,
+                                   num = 20000,
+                                   width_cutoff = 0.4,
+                                   sep_peaks = 0.5,
+                                   dip_cutoff = 0.15,
+                                   min_peak_height_frac = 0.008,
+                                   shoulder_frac = 0.05,
+                                   output_dir) {
   
   # Allowed option values
   valid_options <- c("yes", "no")
-
+  
   subsample    <- tolower(subsample)
-
+  
   # Input validation
   if (!subsample %in% valid_options) {
     stop("Invalid input: please specify 'yes' or 'no'")
@@ -108,8 +118,12 @@ automated_threshold_DF <- function(df,
       
       cutoff_val <- auto_threshold_func(
         tmp[[markers[m]]],
-        marker_name = markers[m]
-      )
+        marker_name = markers[m],
+        width_cutoff = width_cutoff,
+        sep_peaks = sep_peaks,
+        dip_cutoff = dip_cutoff,
+        min_peak_height_frac = min_peak_height_frac,
+        shoulder_frac = shoulder_frac)
       
       auto_cutoff <- rbind(
         auto_cutoff,
@@ -146,7 +160,7 @@ automated_threshold_DF <- function(df,
 # Returns a numeric cutoff rounded to three decimal places
 unimodal_threshold <- function(vec,
                                marker_name,
-                               shoulder_frac = 0.05) {
+                               shoulder_frac = shoulder_frac) {
   
   # Kernel density estimation with trimmed tails
   dpack  <- density_with_trim(vec)
@@ -260,11 +274,12 @@ unimodal_threshold <- function(vec,
 # min_peak_height_frac: Minimum relative peak height as a fraction of max peak
 # Returns a numeric cutoff rounded to three decimal places
 auto_threshold_func <- function(exp_vector, 
-                                 marker_name = "UNKNOWN_MARKER", 
-                                 width_cutoff = 0.4,
-                                 sep_peaks = 0.5,
-                                 dip_cutoff = 0.15,
-                                 min_peak_height_frac = 0.008) {
+                                marker_name = "UNKNOWN_MARKER", 
+                                width_cutoff = 0.4,
+                                sep_peaks = 0.5,
+                                dip_cutoff = 0.15,
+                                min_peak_height_frac = 0.008,
+                                shoulder_frac = 0.05) {
   
   # Density on cleaned data
   dpack <- density_with_trim(exp_vector)
@@ -274,7 +289,7 @@ auto_threshold_func <- function(exp_vector,
   y_trim <- dpack$y_trim
   
   if (length(y) < 5) {
-    return(unimodal_threshold(exp_vector, marker_name))
+    return(unimodal_threshold(exp_vector, marker_name, shoulder_frac))
   }
   
   # Identify local maxima
@@ -297,7 +312,7 @@ auto_threshold_func <- function(exp_vector,
   }
   
   if (length(peak_idx) == 0) {
-    return(unimodal_threshold(exp_vector, marker_name))
+    return(unimodal_threshold(exp_vector, marker_name, shoulder_frac))
   }
   
   peak_positions_all <- x[peak_idx]
@@ -327,7 +342,7 @@ auto_threshold_func <- function(exp_vector,
   
   # If there are less then 2 peaks left, revert to unimodal
   if (length(peak_positions_all) < 2) {
-    return(unimodal_threshold(exp_vector, marker_name))
+    return(unimodal_threshold(exp_vector, marker_name, shoulder_frac))
   }
   
   # Relative peak height filtering
@@ -341,7 +356,7 @@ auto_threshold_func <- function(exp_vector,
   
   # If there are less then 2 peaks left, revert to unimodal
   if (length(peak_positions) < 2) {
-    return(unimodal_threshold(exp_vector, marker_name))
+    return(unimodal_threshold(exp_vector, marker_name, shoulder_frac))
   }
   
   # Order peaks by descending height
@@ -380,5 +395,5 @@ auto_threshold_func <- function(exp_vector,
     return(round(valley_x, 3))
   }
   
-  unimodal_threshold(exp_vector, marker_name)
+  unimodal_threshold(exp_vector, marker_name, shoulder_frac)
 }
