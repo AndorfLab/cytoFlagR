@@ -215,7 +215,7 @@ auto_cutoffs <- data.frame(automated_threshold_DF(df = ffdf,
                                                   output_dir = output.dir))
 
 
-# Next, density plots and biaxial plots can be created to visualize the data and help determine if the automated marker thresholds are sufficient or if they should be overriden. 
+# Next, density plots and biaxial plots can be created to visualize the data and help determine if the automated marker thresholds are sufficient or if they should be overridden. 
 
 # Prior to making these plots, you may want to downsample your data because it can be time-consuming to use all cells when your dataset is large. 
 
@@ -251,7 +251,7 @@ print(dim(ffdf_sampled))
 
 # Now, you can plot the marker expression densities across controls and batches with the automated cutoff shown. This process can be very slow and may take a while to generate density plots, depending on data size.
 
-# To further speed up the process, ref_subsampling can be set to "yes", which means the reference will be subsampled. Concurrently, the ref_subsampling_size can be set to a number, specifying number of cells per sample for reference subsampling. The seed can also be set to ensure reproducability. If ref_subsampling = "no", the reference will contain all cells.
+# To further speed up the process, ref_subsampling can be set to "yes", which means the reference will be subsampled. Concurrently, the ref_subsampling_size can be set to a number, specifying number of cells per sample for reference subsampling. The seed can also be set to ensure reproducibility. If ref_subsampling = "no", the reference will contain all cells.
 
 # If your data has a large amount of batches, you may want to split the data into multiple plots to improve readability. The batches_per_plot parameter can be used in this case.  
 # batches_per_plot indicates the maximum number of batches to include in each plot. For example, if you have 12 batches and batches_per_plot = 5, then for each marker you will have 3 plots (plot 1: batches 1-5, plot 2: batches 6-10, plot 3: batches 11-12)
@@ -564,7 +564,7 @@ generate_EMD_heatmaps(emds_list = pairwise_EMDs_per_marker,
 
 # Next, create boxplots of pairwise EMDs ordered by median EMDs per batch. 
 
-# In the produced figures, the red horizontal line represents the user-defined threshold. The box itself is outlined in red when the batch's median EMD is greater then the threshold.
+# In the produced figures, the red horizontal line represents the user-defined threshold. The box itself is outlined in red when the batch's median EMD is greater than the threshold.
 
 # Plot width and plot height are customizable
 generate_EMD_boxplots(distdf = pairwise_EMDs_per_marker, 
@@ -649,7 +649,7 @@ num <- 50000
 # Number of clusters to make in FlowSOM
 meta_cluster_num <- 9
 
-# Seed for reproducability 
+# Seed for reproducibility 
 seed <- 150
 
 # Set threshold 1
@@ -670,7 +670,7 @@ set_threshold2 <- 1.5
 
 # The ConsensusClusterPlus plots are saved in the folder that begins with cluster_plots. 
 
-# Uses FlowSOM unsupervised clustering to get put each cell into a cluster based on marker expression values
+# Uses FlowSOM unsupervised clustering to put each cell into a cluster based on marker expression values
 filter_df <- getFlowSOM_clusters(data_f = ffdf, 
                                  markers = pheno_markers, 
                                  seed = seed,
@@ -684,7 +684,7 @@ cell_cluster_vector <- filter_df[,"cluster"]
 
 # Now a bar plot showing cluster sizes (number and percent of cells) can be created.
 
-# The horizontal red line represents 0.5% of all analyzed cell and can be used to indicate the very small clusters that are below this line.
+# The horizontal red line represents 0.5% of all analyzed cells and can be used to indicate the very small clusters that are below this line.
 
 # Generate cluster sizes plot
 # Axis size, plot width, and plot height are customizable
