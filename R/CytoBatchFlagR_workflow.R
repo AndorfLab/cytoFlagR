@@ -651,7 +651,7 @@ num <- 50000
 meta_cluster_num <- 8
 
 # Seed for reproducibility 
-seed <- 150
+seed <- 450
 
 # Set threshold 1
 # If the contribution of cells from a batch in a given cluster is
