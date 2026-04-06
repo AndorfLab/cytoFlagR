@@ -435,6 +435,8 @@ Based on your assessment of the data, you may want to edit some marker threshold
 
 You can run the function below to optionally edit and update marker thresholds. Make sure you close the app after downloading a file with the new, edited threshold values.
 
+When choosing a threshold, make sure there is data (cells) both to the right and left of the threshold line. Some downstream functions will not work if there are no cells in the positive or negative population. 
+
 ```{r Change automated marker cutoff values and save table, close the app after downloading file}
 
 # Launch interface to update your marker thresholds
