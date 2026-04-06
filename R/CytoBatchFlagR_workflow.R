@@ -282,6 +282,7 @@ write_density_plot_per_marker(marker_list = markers_1,
 # Based on your assessment of the data, you may want to edit some marker threshold values.
 
 # You can run the function below to optionally edit and update marker thresholds. Make sure you close the app after downloading a file with the new, edited threshold values.
+# When choosing a threshold, make sure there is data (cells) both to the right and left of the threshold line. Some downstream functions will not work if there are no cells in the positive or negative population. 
 
 # Launch interface to update your marker thresholds
 editMarkerTable(auto_cutoffs)
@@ -647,7 +648,7 @@ pheno_markers <- as.character(marker_tbl[which(marker_tbl$status=="phenotype"),"
 num <- 50000
 
 # Number of clusters to make in FlowSOM
-meta_cluster_num <- 9
+meta_cluster_num <- 8
 
 # Seed for reproducibility 
 seed <- 150
