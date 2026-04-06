@@ -339,6 +339,13 @@ First, the tool generates automated marker thresholds for each marker in the dat
 
 # Subsample: change to "yes" if you want CytoBatchFlagR to subsample your data to calculate the marker thresholds
 # If you set subsample = "yes", the seed and number of cells per batch to downsample to (num) should also be set
+# For biomodal detection,  width_cutoff, sep_peaks, dip_cutoff, and min_peak_height_frac can be changed from the default values
+# width_cutoff: Minimum allowable peak width (set to exclude spurious narrow peaks)
+# sep_peaks: Minimum separation required between peaks
+# dip_cutoff: Minimum dip strength (valley) required between peaks 
+# min_peak_height_frac: Minimum relative peak height as a fraction of max peak
+# For unimodal thresholds, shoulder_frac can be changed
+# shoulder_frac: Fraction of peak density height used to define the shoulder
 auto_cutoffs <- data.frame(automated_threshold_DF(df = ffdf, 
                                                   markers = markers_1,
                                                   control_list = controls, 
@@ -347,6 +354,11 @@ auto_cutoffs <- data.frame(automated_threshold_DF(df = ffdf,
                                                   subsample = "yes", 
                                                   seed = 450,
                                                   num = 20000,
+                                                  width_cutoff = 0.4,
+                                                  sep_peaks = 0.5,
+                                                  dip_cutoff = 0.15,
+                                                  min_peak_height_frac = 0.008,
+                                                  shoulder_frac = 0.05,
                                                   output_dir = output.dir))
 
 ```
