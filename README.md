@@ -73,5 +73,5 @@ BioC_package_installer(required_BioconductorPackages)
 # check if the packages can be loaded
 lapply(required_BioconductorPackages, require, character.only = TRUE)
 ```
-## Citations
+## Citation
 S.Eswar, Z. T.Koenig, A. R.Tursi, J.Cobeña-Reyes, T.Tilburgs, and S.Andorf, “CytoBatchFlagR: A Comprehensive Framework to Objectively Assess High-Parameter Cytometry Data for Batch Effects,” Cytometry Part A (2026): 1–16, https://doi.org/10.1002/cyto.a.70024.
