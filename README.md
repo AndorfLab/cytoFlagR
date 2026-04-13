@@ -74,7 +74,4 @@ BioC_package_installer(required_BioconductorPackages)
 lapply(required_BioconductorPackages, require, character.only = TRUE)
 ```
 ## Citations
-
-Eswar, S., Koenig, Z. T., Tursi, A. R., Cobeña-Reyes, J., Tilburgs, T., & Andorf, S. (2025). CytoBatchFlagR: A comprehensive framework to objectively assess high-parameter cytometry data for batch effects. bioRxiv : the preprint server for biology, 2025.05.27.656370. https://doi.org/10.1101/2025.05.27.656370
-
-Koenig, Z., Andorf, S., Tilburgs, T., & Eswar, S. (2025). CytoBatchFlagR: Spectral flow cytometry dataset [Data set]. Zenodo. https://doi.org/10.5281/zenodo.15388817
+S.Eswar, Z. T.Koenig, A. R.Tursi, J.Cobeña-Reyes, T.Tilburgs, and S.Andorf, “CytoBatchFlagR: A Comprehensive Framework to Objectively Assess High-Parameter Cytometry Data for Batch Effects,” Cytometry Part A (2026): 1–16, https://doi.org/10.1002/cyto.a.70024.
